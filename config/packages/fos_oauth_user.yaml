@@ -1,0 +1,11 @@
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        App\Lev\CRMBundle\Entity\Oauth2\Client
+    access_token_class:  App\Lev\CRMBundle\Entity\Oauth2\AccessToken
+    refresh_token_class: App\Lev\CRMBundle\Entity\Oauth2\RefreshToken
+    auth_code_class:     App\Lev\CRMBundle\Entity\Oauth2\AuthCode
+    service:
+        user_provider:   fos_user.user_provider.username #fos_user.user_manager
+        options:
+            access_token_lifetime: 31104000  # %oauth_access_token_lifetime% (3600*24*30*12)
+            refresh_token_lifetime: 1209600 #%oauth_refresh_token_lifetime%

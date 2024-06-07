@@ -1,0 +1,157 @@
+imports:
+    - { resource: parameters.yaml }
+    - { resource: security.yaml }
+    - { resource: services.yaml }
+    - { resource: api_roles.yaml }
+    - { resource: sales_commissions.yaml }
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yaml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: false
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+    form_themes:
+#          - form_div_layout.html.twig
+          - bootstrap_3_layout.html.twig
+#          - bootstrap_3_horizontal_layout.html.twig
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
+        #yui_css:
+        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+                auto_mapping: true
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    port:      "%mailer_port%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+fos_user:
+    db_driver:     orm
+    firewall_name: api
+    user_class:    App\Lev\CRMBundle\Entity\Staff
+    group:
+        group_class: App\Lev\CRMBundle\Entity\StaffRole
+    service:
+        user_manager: lev_api.user_manager
+fos_rest:
+    routing_loader:
+        default_format: json
+        include_format: false
+
+jms_serializer:
+    handlers:
+        datetime:
+            default_format:    "Y-m-d H:i:s"   # ISO8601
+            default_timezone: "UTC" #defaults to whatever timezone set in php.ini or via date_default_timezone_set
+
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: []
+        allow_headers: []
+        allow_methods: []
+        expose_headers: []
+        max_age: 0
+        hosts: []
+        origin_regex: false
+    paths:
+        '^/oauth/':
+            allow_origin: %cors_oauth_allow_origin%
+            allow_headers: %cors_oauth_allow_headers%
+            allow_methods: ['GET', 'POST']
+            max_age: %cors_oauth_max_age%
+        '^/api/':
+            allow_origin: %cors_api_allow_origin%
+            allow_headers: %cors_api_allow_headers%
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+            max_age: %cors_api_max_age%
+        '^/socket/':
+            allow_credentials: true
+            allow_origin: %cors_api_allow_origin%
+            allow_headers: %cors_api_allow_headers%
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+            hosts: %cors_hosts%
+            max_age: %cors_api_max_age%
+
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        App\Lev\CRMBundle\Entity\Oauth2\Client
+    access_token_class:  App\Lev\CRMBundle\Entity\Oauth2\AccessToken
+    refresh_token_class: App\Lev\CRMBundle\Entity\Oauth2\RefreshToken
+    auth_code_class:     App\Lev\CRMBundle\Entity\Oauth2\AuthCode
+    service:
+        user_provider:   fos_user.user_provider.username #fos_user.user_provider
+        options:
+            access_token_lifetime: %oauth_access_token_lifetime%
+            refresh_token_lifetime: %oauth_refresh_token_lifetime%
+
+stof_doctrine_extensions:
+    uploadable:
+        validate_writable_directory: false
+    orm:
+        default:
+            softdeleteable: true
+            blameable: true
+            timestampable: true
+            uploadable: false
+
+
+nelmio_api_doc:
+    areas:
+        path_patterns: # an array of regexps
+            - ^/api(?!/doc$)
+        host_patterns:
+            - ^api\.

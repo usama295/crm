@@ -1,0 +1,52 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+## FOSUserBundle
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix: /admin
+
+fos_user_socket:
+    resource: "@LevCRMBundle/Resources/config/routing/security.yml"
+    prefix: /socket
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+
+# FOSOAuthServerBundle
+
+#bbfos_oauth_server_token:
+#bb    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+#bbfos_oauth_server_authorize:
+#bb    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
+# API ADmin
+
+lev_admin_staff:
+    resource: "@LevCRMBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin
+
+lev_api:
+    resource: "@LevAPIBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# API
+lev_crm:
+    resource: "@LevCRMBundle/Resources/config/routing_api.yml"
+    prefix:   /api/v1
+
+
+
+#api doc genrator
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }

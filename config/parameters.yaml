@@ -1,0 +1,39 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: odr-crm-client
+    database_user: root
+    database_password: root
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_port: 25
+    mailer_user: null
+    mailer_password: null
+    mailer_from:
+        email: uman341@gmail.com
+        name: 'M Usman'
+    mailer_delivery_address: uman341@gmail.com
+    locale: en
+    secret: HCRL3@d3r
+    oauth_access_token_lifetime: 3600
+    oauth_refresh_token_lifetime: 1209600
+    cors_oauth_allow_origin: ['*']
+        #- '*'
+    cors_oauth_allow_headers: ['*']
+        #- '*'
+    cors_oauth_max_age: 3600
+    cors_api_allow_origin: ['*']
+        #- '*'
+    cors_api_allow_headers: ['*']
+        #- '*'
+    cors_api_max_age: 3600
+    cors_hosts:
+        #- ^api\.
+        #- ^odr-crm-api\.
+    app_url: 'https://crm.com'
+    api_url: 'https://crm-api.com'
+    twilio_sid: 
+    twilio_token: 
+    twilio_number: ''

@@ -1,0 +1,12 @@
+fos_user: 
+    db_driver:     orm
+    firewall_name: api #from api
+    user_class: App\Lev\CRMBundle\Entity\Staff #AppBundle\Entity\User
+    from_email:
+        address: "bhaskar.b@latitudetechnolabs.com"
+        sender_name: "bhaskar.b@latitudetechnolabs.com"
+    group:
+        group_class: App\Lev\CRMBundle\Entity\StaffRole
+    service:
+        user_manager: lev_api.user_manager
+

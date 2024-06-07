@@ -1,0 +1,124 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+
+        oauth_authorize:
+            pattern:   ^/oauth/v2/auth
+            form_login:
+                provider:  fos_userbundle
+                check_path: fos_user_security_check
+                login_path: fos_user_security_login
+            anonymous: true
+
+        twiliovoice:
+            pattern:    ^/api/v1/twilio/voice
+            security:   false
+
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+
+        twilio:
+            pattern:    ^/twilio
+            security:   false
+
+
+
+
+        # main:
+        #     pattern: ^/
+        #     form_login:
+        #         provider: fos_userbundle
+        #         csrf_token_generator: security.csrf.token_manager
+
+        #     logout:       true
+        #     anonymous:    true
+
+        admin:
+            pattern:    ^/admin
+            security:   true
+            anonymous: true
+            form_login:
+                provider: fos_userbundle
+                check_path: fos_user_security_check
+                login_path: fos_user_security_login
+                csrf_parameter:     false
+                default_target_path: lev_api_admin
+            logout:
+                path:   fos_user_security_logout
+                target: lev_api_admin
+
+    #newfirewalls:
+
+        #newdev:
+            #newpattern:  ^/(_(profiler|wdt)|css|images|js)/
+            #newsecurity: false
+
+        #newoauth_token:
+            #newpattern:    ^/oauth/v2/token
+            #newsecurity:   false
+
+        #newadmin:
+            #newpattern:    ^/admin
+            #newsecurity:   true
+            #newanonymous: true
+            #newform_login:
+                #newprovider: fos_userbundle
+                #newcheck_path: fos_user_security_check
+                #newlogin_path: fos_user_security_login
+                #newcsrf_parameter:     false
+                #newdefault_target_path: lev_api_admin
+            #newlogout: true
+                #newpath:   fos_user_security_logout
+                #newtarget: lev_api_admin
+
+        #newoauth_authorize:
+            #newpattern:   ^/oauth/v2/auth
+            #newform_login:
+                #newprovider:  fos_userbundle
+                #newcheck_path: fos_user_security_check
+                #newlogin_path: fos_user_security_login
+            #newanonymous: true
+
+        #api:
+            #pattern:    ^/api
+            #fos_oauth:  true
+            #stateless:  true
+
+        #newtwilio:
+            #newpattern:    ^/twilio
+            #newsecurity:   false
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        #sym4 - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #sym4 - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #sym4 - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #sym4 - { path: ^/admin/, role: ROLE_ADMIN }
+
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        # - { path: ^/socket/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/socket/auth$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/socket/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/, role: IS_AUTHENTICATED_FULLY }

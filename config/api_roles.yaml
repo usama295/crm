@@ -1,0 +1,18 @@
+parameters:
+    lev_api.crud_roles:
+        staff           : [ view, create, update, delete ]
+        staffrole       : [ view, create, update, delete ]
+        office          : [ view, create, update, delete ]
+        advisoryzipcode : [ view, create, update, delete ]
+        product         : [ view, create, update, delete ]
+        productextra    : [ view, create, update, delete ]
+        customer        : [ view, create, update, delete ]
+        appointment     : [ view, create, update, delete ]
+        sale            : [ view, create, update, delete ]
+        project         : [ view, create, update, delete ]
+        contractor      : [ view, create, update, delete ]
+        institution     : [ view, create, update, delete ]
+        call            : [ view, create, update, delete ]
+        callrecord      : [ view, create, update, delete ]
+    lev_api.other_roles:
+        ROLE_REPORT: Report Access
