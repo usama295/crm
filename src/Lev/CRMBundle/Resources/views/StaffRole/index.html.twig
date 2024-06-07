@@ -1,0 +1,49 @@
+{% extends 'LevAPIBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>
+                <a href="{{ path('staffrole_new') }}" class="btn btn-primary pull-right">
+                    <i class="fa fa-plus"></i> Add
+                </a>
+                <i class="fa fa-users"></i> Staff Roles
+            </h1>
+
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>SuperAdmin</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.name }}</td>
+                    <td>
+                        {% if entity.superadmin %}
+                            <i class="fa fa-check-square-o"></i>
+                        {% else %}
+                            <i class="fa fa-square-o"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('staffrole_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">
+                            <i class="fa fa-pencil"></i> edit
+                        </a>
+                        <button href="#" class="btn btn-danger btn-xs" disabled>
+                            <i class="fa fa-trash-o"></i> delete
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+<h1>ODR CRM Alert</h1>
+<p>Hello, {{ appointment.salesRep.firstName }},</p>
+<p>There's a new appointment for you:</p>
+
+<h3><a href="{{ app_url }}/appointment/edit/{{ appointment.id }}">{{ appointment.name }}</a></h3>
+
+<p>Scheduled for: {{ appointment.datetime | date('M, d Y h:i A') }} </p>
+<p>Address: {{ appointment.addressStreet }},  {{ appointment.addressCity }} / {{ appointment.addressState }} - {{ appointment.addressZip }}</p>
+
+<p>Google Map Link: <a href="https://www.google.com.br/maps/place/{{ appointment.getGoogleMapsSearch() }}">click here</a></p>
+
+<p><a href="{{ app_url }}/appointment/confirm/{{ appointment.id }}">Click here to confirm: {{ appointment.name }}</a></p>
+
+<br>
+<p><small>Sent by <a href="">ODR CRM</a></small></p>

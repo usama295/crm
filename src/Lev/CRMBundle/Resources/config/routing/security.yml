@@ -1,0 +1,19 @@
+levcrm_socket_security_auth:
+    path:     /auth
+    defaults: { _controller: "LevCRMBundle:Security:auth" }
+    methods:  POST
+
+# levcrm_socket_security_login:
+#     path:     /login
+#     defaults: { _controller: "LevCRMBundle:Security:login" }
+#     methods:  [ GET, POST ]
+#
+# levcrm_socket_security_login_check:
+#     path:     /login_check
+#     defaults: { _controller: "LevCRMBundle:Security:check" }
+#     methods:  POST
+#
+# levcrm_socket_security_logout:
+#     path:     /logout
+#     defaults: { _controller: "LevCRMBundle:Security:logout" }
+#     methods:  GET

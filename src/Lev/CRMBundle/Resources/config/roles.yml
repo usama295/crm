@@ -1,0 +1,4 @@
+roles:
+    staff:     [ view, create, update, delete ]
+    staffrole: [ view, create, update, delete ]
+    office:    [ view, create, update, delete ]

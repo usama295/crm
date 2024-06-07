@@ -1,0 +1,26 @@
+staffrole:
+    path:     /
+    defaults: { _controller: "LevCRMBundle:StaffRole:index" }
+
+staffrole_new:
+    path:     /new
+    defaults: { _controller: "LevCRMBundle:StaffRole:new" }
+
+staffrole_create:
+    path:     /create
+    defaults: { _controller: "LevCRMBundle:StaffRole:create" }
+    methods:  POST
+
+staffrole_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LevCRMBundle:StaffRole:edit" }
+
+staffrole_update:
+    path:     /{id}/update
+    defaults: { _controller: "LevCRMBundle:StaffRole:update" }
+    methods:  [POST, PUT]
+
+staffrole_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LevCRMBundle:StaffRole:delete" }
+    methods:  [POST, DELETE]

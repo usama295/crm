@@ -1,0 +1,70 @@
+{% extends 'LevAPIBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>
+                <a href="{{ path('client') }}" class="btn btn-default pull-right">
+                    <i class="fa fa-arrow-left"></i> Back to list
+                </a>
+                <i class="fa fa-user"></i> New Client
+            </h1>
+        </div>
+
+        {{ form_start(form, { 'action': path('client_create', { id: entity.id}), 'method': 'POST' }) }}
+        <div class="form-group">
+            {{ form_label(form.redirectUris) }}
+            <button class="btn btn-default btn-xs" href="#" id="addRedirectUri"><i class="fa fa-plus"></i> Add Redirect Uri</button>
+            <ul class="list-unstyled" id="redirectUri-fields-list" data-prototype="{{ form_widget(form.redirectUris.vars.prototype)|e }}">
+                {{ form_errors(form.redirectUris) }}
+                {% for redirectUri in form.redirectUris %}
+                    <li>
+                        <div class="input-group">
+                            {{ form_errors(redirectUri) }}
+                            {{ form_widget(redirectUri) }}
+                            <span class="input-group-addon btn btn-danger remove"><i class="fa fa-trash-o"></i> delete</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {{ form_row(form.allowedGrantTypes) }}
+        {{ form_widget(form.submit) }}
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        // keep track of how many email fields have been rendered
+        var count = '{{ form.redirectUris|length }}';
+
+        $(function() {
+            $('#addRedirectUri').click(function(e) {
+                e.preventDefault();
+                var fieldsList = $('#redirectUri-fields-list');
+                var newWidget =
+                        '<div class="input-group">' +
+                        fieldsList.attr('data-prototype') +
+                        '<span class="input-group-addon btn btn-danger remove"><i class="fa fa-trash-o"></i> delete</span>' +
+                        '</div>';
+                newWidget = newWidget.replace(/__name__/g, count);
+                count++;
+                var newLi = $('<li></li>').html(newWidget);
+                newLi.appendTo(fieldsList);
+                bindRemove();
+            });
+
+        });
+
+        function bindRemove() {
+            $('.remove').on('click', function(e) {
+                $(this).parent().remove();
+            });
+        }
+
+        bindRemove();
+    </script>
+{% endblock %}

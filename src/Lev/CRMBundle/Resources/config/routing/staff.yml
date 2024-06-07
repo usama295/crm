@@ -1,0 +1,26 @@
+staff:
+    path:     /
+    defaults: { _controller: "LevCRMBundle:Staff:index" }
+
+staff_new:
+    path:     /new
+    defaults: { _controller: "LevCRMBundle:Staff:new" }
+
+staff_create:
+    path:     /create
+    defaults: { _controller: "LevCRMBundle:Staff:create" }
+    methods:  POST
+
+staff_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LevCRMBundle:Staff:edit" }
+
+staff_update:
+    path:     /{id}/update
+    defaults: { _controller: "LevCRMBundle:Staff:update" }
+    methods:  [POST, PUT]
+
+staff_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LevCRMBundle:Staff:delete" }
+    methods:  [POST, DELETE]

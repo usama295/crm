@@ -1,0 +1,36 @@
+{% extends 'LevAPIBundle::layout.html.twig' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1><b>API</b> Admin</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="text-center">
+                <a href="{{ path('client') }}" class="btn btn-default btn-lg"><i class="fa fa-server fa-4x"></i></a>
+                <br>
+                <h4>Client Apps</h4>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="text-center">
+                <a href="{{ path('staff') }}" class="btn btn-default btn-lg"><i class="fa fa-user fa-4x"></i></a>
+                <br>
+                <h4>Users (Staff)</h4>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="text-center">
+                <a href="{{ path('staffrole') }}" class="btn btn-default btn-lg"><i class="fa fa-users fa-4x"></i></a>
+                <br>
+                <h4>Groups (Staff Roles)</h4>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

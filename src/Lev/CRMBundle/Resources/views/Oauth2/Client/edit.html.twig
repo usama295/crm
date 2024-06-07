@@ -1,0 +1,74 @@
+{% extends 'LevAPIBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>
+                <a href="{{ path('client') }}" class="btn btn-default pull-right">
+                    <i class="fa fa-arrow-left"></i> Back to list
+                </a>
+                <i class="fa fa-user"></i> Edit Client
+            </h1>
+        </div>
+
+        {{ form_start(edit_form, { 'action': path('client_update', { id: entity.id}), 'method': 'PUT' }) }}
+        <div class="form-group">
+            {{ form_label(edit_form.redirectUris) }}
+            <button class="btn btn-default btn-xs" id="addRedirectUri"><i class="fa fa-plus"></i> Add Redirect Uri</button>
+            <ul class="list-unstyled" id="redirectUri-fields-list" data-prototype="{{ form_widget(edit_form.redirectUris.vars.prototype)|e }}">
+                {{ form_errors(edit_form.redirectUris) }}
+                {% for redirectUri in edit_form.redirectUris %}
+                    <li>
+                        <div class="input-group">
+                            {{ form_errors(redirectUri) }}
+                            {{ form_widget(redirectUri) }}
+                            <span class="input-group-addon btn btn-danger remove"><i class="fa fa-trash-o"></i> delete</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {{ form_row(edit_form.allowedGrantTypes) }}
+        {{ form_widget(edit_form.submit) }}
+
+        {{ form_rest(edit_form) }}
+        {{ form_end(edit_form) }}
+        <hr/>
+        {{ form(delete_form) }}
+
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        // keep track of how many email fields have been rendered
+        var count = '{{ edit_form.redirectUris|length }}';
+
+        $(function() {
+            $('#addRedirectUri').click(function(e) {
+                e.preventDefault();
+                var fieldsList = $('#redirectUri-fields-list');
+                var newWidget =
+                        '<div class="input-group">' +
+                        fieldsList.attr('data-prototype') +
+                        '<span class="input-group-addon btn btn-danger remove"><i class="fa fa-trash-o"></i> delete</span>' +
+                        '</div>';
+                newWidget = newWidget.replace(/__name__/g, count);
+                count++;
+                var newLi = $('<li></li>').html(newWidget);
+                newLi.appendTo(fieldsList);
+                bindRemove();
+            });
+
+        });
+
+        function bindRemove() {
+            $('.remove').on('click', function(e) {
+                $(this).parent().remove();
+            });
+        }
+
+        bindRemove();
+    </script>
+{% endblock %}

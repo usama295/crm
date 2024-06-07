@@ -1,0 +1,91 @@
+lev_crm_homepage:
+    path:     /
+    defaults: { _controller: LevCRMBundle:Default:index }
+
+lev_crm_system:
+    resource: 'App\Lev\CRMBundle\Controller\API\SystemController'
+    type:     annotation
+
+lev_crm_fileupload:
+    resource: 'App\Lev\CRMBundle\Controller\API\FileUploadController'
+    type:     annotation
+
+lev_crm_security:
+    resource: 'App\Lev\CRMBundle\Controller\API\SecurityController'
+    type:     annotation
+
+lev_crm_dashboard:
+    resource: 'App\Lev\CRMBundle\Controller\API\DashboardController'
+    type:     annotation
+
+lev_crm_report:
+    resource: 'App\Lev\CRMBundle\Controller\API\ReportController'
+    type:     annotation
+
+lev_crm_staff:
+    resource: 'App\Lev\CRMBundle\Controller\API\StaffController'
+    type:     rest
+
+lev_crm_staff_role:
+    resource: 'App\Lev\CRMBundle\Controller\API\StaffRoleController'
+    type:     rest
+
+lev_crm_office:
+    resource: 'App\Lev\CRMBundle\Controller\API\OfficeController'
+    type:     rest
+
+lev_crm_advisoryzipcode:
+    resource: 'App\Lev\CRMBundle\Controller\API\AdvisoryZipCodeController'
+    type:     rest
+
+lev_crm_product_annotation:
+    resource: 'App\Lev\CRMBundle\Controller\API\ProductController'
+    type:     annotation
+
+lev_crm_product:
+    resource: 'App\Lev\CRMBundle\Controller\API\ProductController'
+    type:     rest
+
+lev_crm_productextra:
+    resource: 'App\Lev\CRMBundle\Controller\API\ProductExtraController'
+    type:     rest
+
+lev_crm_customer:
+    resource: 'App\Lev\CRMBundle\Controller\API\CustomerController'
+    type:     rest
+
+lev_crm_contractor:
+    resource: 'App\Lev\CRMBundle\Controller\API\ContractorController'
+    type:     rest
+
+lev_crm_institution:
+    resource: 'App\Lev\CRMBundle\Controller\API\InstitutionController'
+    type:     rest
+
+lev_crm_appointment_annotation:
+    resource: 'App\Lev\CRMBundle\Controller\API\AppointmentController'
+    type:     annotation
+
+lev_crm_appointment_rest:
+    resource: 'App\Lev\CRMBundle\Controller\API\AppointmentController'
+    type:     rest
+
+lev_crm_sale:
+    resource: 'App\Lev\CRMBundle\Controller\API\SaleController'
+    type:     rest
+
+lev_crm_project:
+    resource: 'App\Lev\CRMBundle\Controller\API\ProjectController'
+    type:     rest
+
+lev_crm_call:
+    resource: 'App\Lev\CRMBundle\Controller\API\CallController'
+    type:     rest
+
+lev_crm_call_record:
+    resource: 'App\Lev\CRMBundle\Controller\API\CallRecordController'
+    type:     rest
+
+lev_crm_twilio:
+    resource: 'App\Lev\CRMBundle\Controller\TwilioController'
+    type:     annotation

@@ -1,0 +1,169 @@
+parameters:
+    lev_crm.service.customer_generate_id.class  : App\Lev\CRMBundle\Service\CustomerGenerateId
+    lev_crm.service.staff.class                 : App\Lev\CRMBundle\Service\StaffService
+    lev_crm.service.history.class               : App\Lev\CRMBundle\Service\HistoryService
+    lev_crm.service.dashboard.class             : App\Lev\CRMBundle\Service\DashboardService
+    lev_crm.service.report.class                : App\Lev\CRMBundle\Service\ReportService
+    lev_crm.service.fileupload.class            : App\Lev\CRMBundle\Service\FileUploadService
+    lev_crm.service.import.class                : App\Lev\CRMBundle\Service\ImportService
+    lev_crm.service.call.class                  : App\Lev\CRMBundle\Service\CallService
+    lev_crm.service.mail.class                  : App\Lev\CRMBundle\Service\MailService
+    lev_crm.service.productcalculator.class     : App\Lev\CRMBundle\Service\ProductCalculatorService
+    lev_crm.service.appointment.class           : App\Lev\CRMBundle\Service\AppointmentService
+    lev_crm.service.sale.class                  : App\Lev\CRMBundle\Service\SaleService
+    lev_crm.service.sms.class                   : App\Lev\CRMBundle\Service\Twilio\SMSService
+    lev_crm.service.voip.class                  : App\Lev\CRMBundle\Service\Twilio\VoIPService
+
+#    app_url: 'https://crm.onedayroofing.com'
+#    api_url: 'https://crm-api.onedayroofing.com'
+
+    app_url: 'http://127.0.0.1:3008'
+    api_url: 'http://127.0.0.1:8000/api/v1'
+
+    twilio_account_sid: ''
+    twilio_auth_token: ''
+    twilio_no: ''
+    twilio_from: ''
+    twilio_delivery: ''
+    twilio_application_sid: ''
+    twilio_call_delivery: true
+
+    mailer_from:
+        email: uman341@gmail.com
+        name: 'M Usman'
+    mailer_delivery_address: uman341@gmail.com
+
+    lev.sales_commissions:
+        100: [ 15.0, 15.0 ]
+        99: [ 14.6, 14.7 ]
+        98: [ 14.2, 14.4 ]
+        97: [ 13.8, 14.1 ]
+        96: [ 13.4, 13.8 ]
+        95: [ 13.0, 13.5 ]
+        94: [ 12.6, 13.2 ]
+        93: [ 12.2, 12.9 ]
+        92: [ 11.8, 12.6 ]
+        91: [ 11.4, 12.3 ]
+        90: [ 11.0, 12.0 ]
+        89: [ 10.6, 11.7 ]
+        88: [ 10.2, 11.4 ]
+        87: [ 9.8, 11.1 ]
+        86: [ 9.4, 10.8 ]
+        85: [ 9.0, 10.5 ]
+        84: [ 8.6, 10.2 ]
+        83: [ 8.2, 9.9 ]
+        82: [ 7.8, 9.6 ]
+        81: [ 7.4, 9.3 ]
+        80: [ 7.0, 9.0 ]
+        79: [ 6.6, 8.7 ]
+        78: [ 6.2, 8.4 ]
+        77: [ 5.8, 8.1 ]
+        76: [ 5.4, 7.8 ]
+        75: [ 5.0, 7.5 ]
+        74: [ 1.0, 7.2 ]
+        73: [ 1.0, 6.9 ]
+        72: [ 1.0, 6.6 ]
+        71: [ 1.0, 6.3 ]
+        70: [ 1.0, 6.0 ]
+        69: [ 1.0, 5.7 ]
+        68: [ 1.0, 5.4 ]
+        67: [ 1.0, 5.1 ]
+        66: [ 1.0, 4.8 ]
+        65: [ 1.0, 4.5 ]
+        64: [ 1.0, 4.2 ]
+        63: [ 1.0, 3.9 ]
+        62: [ 1.0, 3.6 ]
+        61: [ 1.0, 3.3 ]
+        60: [ 1.0, 3.0 ]
+        59: [ 1.0, 1.0 ]
+        58: [ 1.0, 1.0 ]
+        57: [ 1.0, 1.0 ]
+        56: [ 1.0, 1.0 ]
+        55: [ 1.0, 1.0 ]
+
+
+
+services:
+    lev_crm.service.customer_generate_id:
+        class:     "%lev_crm.service.customer_generate_id.class%"
+        arguments: ["@doctrine"]
+        public: true
+
+    lev_crm.service.appointment:
+        class:     "%lev_crm.service.appointment.class%"
+        arguments: ["@doctrine"]
+
+    lev_crm.service.sale:
+        class:     "%lev_crm.service.sale.class%"
+        arguments: ["@doctrine"]
+
+    lev_crm.service.history:
+        class:     "%lev_crm.service.history.class%"
+        arguments: ["@doctrine"]
+        public: true
+
+    lev_crm.service.staff:
+        class:     "%lev_crm.service.staff.class%"
+        arguments: ["@doctrine", "@lev_crm.service.history"]
+        public: true
+        
+    lev_crm.service.dashboard:
+        class:     "%lev_crm.service.dashboard.class%"
+        arguments: ["@doctrine"]
+        public: true
+
+    lev_crm.service.report:
+        class:     "%lev_crm.service.report.class%"
+        arguments: ["@doctrine", "%lev.sales_commissions%"]
+        public: true
+
+    lev_crm.service.fileupload:
+        class:     "%lev_crm.service.fileupload.class%"
+        arguments: ["@doctrine", '%kernel.root_dir%']
+        public: true
+
+    lev_crm.service.import:
+        class:     "%lev_crm.service.import.class%"
+        arguments: ["@doctrine", "@service_container"]
+
+    lev_crm.service.call:
+        class:     "%lev_crm.service.call.class%"
+        # arguments: ["@doctrine", "@security.context", "@service_container"]
+        arguments: ["@doctrine", "@service_container"]
+        public: true
+
+
+    lev_crm.service.mail:
+        class:     "%lev_crm.service.mail.class%"
+        arguments: ["@mailer", "%mailer_from%", "@templating.engine.twig", "%app_url%"]
+        public: true
+        
+    lev_crm.service.sms:
+        class:     "%lev_crm.service.sms.class%"
+        arguments:
+          - "@logger"
+          - "%app_url%"
+          - "%twilio_account_sid%"
+          - "%twilio_auth_token%"
+          - "%twilio_from%"
+          - "%twilio_delivery%"
+         # public: true
+
+    lev_crm.service.voip:
+        class:     "%lev_crm.service.voip.class%"
+        arguments:
+          - "@doctrine"
+          - "@logger"
+          - "@lev_crm.service.history"
+          - "%twilio_account_sid%"
+          - "%twilio_auth_token%"
+          - "%twilio_application_sid%"
+          - "%twilio_call_delivery%"
+          - "%api_url%"
+          - "%twilio_no%"
+        public: true
+
+    lev_crm.service.productcalculator:
+        class:     "%lev_crm.service.productcalculator.class%"
+        arguments: ["@doctrine",  "@logger"]
+        public: true

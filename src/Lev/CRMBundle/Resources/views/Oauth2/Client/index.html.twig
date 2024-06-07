@@ -1,0 +1,59 @@
+{% extends 'LevAPIBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>
+                <a href="{{ path('client_new') }}" class="btn btn-primary pull-right">
+                    <i class="fa fa-plus"></i> Add
+                </a>
+                <i class="fa fa-server"></i> Client list
+            </h1>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Client</th>
+                <th>Redirect URIs</th>
+                <th>Allowed Grant Types</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><b>ID:</b> {{ entity.publicId }}</li>
+                            <li><b>Secret:</b> {{ entity.secret }}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                        {% for val in entity.redirectUris %}
+                            <li>{{ val }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                            {% for val in entity.allowedGrantTypes %}
+                                <li>{{ val }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="{{ path('client_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">
+                            <i class="fa fa-pencil"></i> edit
+                        </a>
+                        <button href="#" class="btn btn-danger btn-xs" disabled>
+                            <i class="fa fa-trash-o"></i> delete
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

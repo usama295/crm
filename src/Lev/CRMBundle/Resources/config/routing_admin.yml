@@ -1,0 +1,11 @@
+lev_crm_admin_staff:
+    resource: "@LevCRMBundle/Resources/config/routing/staff.yml"
+    prefix:   /staffs
+
+lev_crm_staffrole:
+    resource: "@LevCRMBundle/Resources/config/routing/staffrole.yml"
+    prefix:   /staffroles
+
+ev_crm_clients:
+    resource: "@LevCRMBundle/Resources/config/routing/oauth2_client.yml"
+    prefix:   /clients

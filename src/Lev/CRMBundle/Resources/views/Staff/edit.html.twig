@@ -1,0 +1,17 @@
+{% extends 'LevAPIBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>
+            <a href="{{ path('staff') }}" class="btn btn-default pull-right">
+                <i class="fa fa-arrow-left"></i> Back to list
+            </a>
+            <i class="fa fa-user"></i> Edit Staff
+        </h1>
+    </div>
+    {{ form(edit_form) }}
+    <hr/>
+    {{ form(delete_form) }}
+</div>
+{% endblock %}

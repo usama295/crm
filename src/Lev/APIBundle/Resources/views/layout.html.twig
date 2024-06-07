@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}API Admin{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('bundles/levapi/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/levapi/css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/levapi/css/chosen/bootstrap-chosen.css') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <style>
+            body { padding-top: 60px;}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><b>API</b> Admin</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+                    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ path('client') }}"><i class="fa fa-server"></i> Client Apps</a></li>
+                            <li><a href="{{ path('staff') }}"><i class="fa fa-user"></i> Users (Staff)</a></li>
+                            <li><a href="{{ path('staffrole') }}"><i class="fa fa-users"></i> Groups (Staff Roles)</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                        </ul>
+                        <p class="navbar-text">
+                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.fullname}, 'FOSUserBundle') }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <div>
+        </div>
+        {% block content %}{% endblock %}
+        <script src="{{ asset('bundles/levapi/js/jquery-1.11.2.min.js') }}"></script>
+        <script src="{{ asset('bundles/levapi/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/levapi/js/chosen.jquery.min.js') }}"></script>
+        <script>
+            $(function() {
+                $(".chosen-select").chosen();
+            });
+        </script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

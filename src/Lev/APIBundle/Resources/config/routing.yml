@@ -1,0 +1,18 @@
+lev_api_admin:
+    path:     /admin
+    defaults: { _controller: LevAPIBundle:Admin:index }
+
+lev_twilio_outbound:
+    path:     /twilio/outbound/{appointmentId}
+    methods: [POST,GET]
+    defaults: { _controller: LevCRMBundle:Twilio:outbound }
+
+lev_twilio_outbound_short:
+    path:     /twilio/outbound
+    methods: [POST,GET]
+    defaults: { _controller: LevCRMBundle:Twilio:outboundShort }
+
+lev_twilio_statuscallback:
+    path:     /twilio/statuscallback/{appointmentId}
+    methods: [POST,GET]
+    defaults: { _controller: LevCRMBundle:Twilio:statusCallback }
